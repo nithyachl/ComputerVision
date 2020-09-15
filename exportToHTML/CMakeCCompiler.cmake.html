@@ -1,0 +1,98 @@
+<html>
+<head>
+<title>CMakeCCompiler.cmake</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #000000;}
+.s1 { color: #080808;}
+.s2 { color: #067d17;}
+.s3 { color: #0033b3;}
+.s4 { color: #8c8c8c; font-style: italic;}
+.s5 { color: #0037a6;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+CMakeCCompiler.cmake</font>
+</center></td></tr></table>
+<pre>set<span class="s1">(</span><span class="s2">CMAKE_C_COMPILER </span><span class="s1">&quot;</span><span class="s2">/Library/Developer/CommandLineTools/usr/bin/cc</span><span class="s1">&quot;)</span>
+set<span class="s1">(</span><span class="s2">CMAKE_C_COMPILER_ARG1 </span><span class="s1">&quot;&quot;)</span>
+set<span class="s1">(</span><span class="s2">CMAKE_C_COMPILER_ID </span><span class="s1">&quot;</span><span class="s2">AppleClang</span><span class="s1">&quot;)</span>
+set<span class="s1">(</span><span class="s2">CMAKE_C_COMPILER_VERSION </span><span class="s1">&quot;</span><span class="s2">11.0.3.11030032</span><span class="s1">&quot;)</span>
+set<span class="s1">(</span><span class="s2">CMAKE_C_COMPILER_VERSION_INTERNAL </span><span class="s1">&quot;&quot;)</span>
+set<span class="s1">(</span><span class="s2">CMAKE_C_COMPILER_WRAPPER </span><span class="s1">&quot;&quot;)</span>
+set<span class="s1">(</span><span class="s2">CMAKE_C_STANDARD_COMPUTED_DEFAULT </span><span class="s1">&quot;</span><span class="s2">11</span><span class="s1">&quot;)</span>
+set<span class="s1">(</span><span class="s2">CMAKE_C_COMPILE_FEATURES </span><span class="s1">&quot;</span><span class="s2">c_std_90;c_function_prototypes;c_std_99;c_restrict;c_variadic_macros;c_std_11;c_static_assert</span><span class="s1">&quot;)</span>
+set<span class="s1">(</span><span class="s2">CMAKE_C90_COMPILE_FEATURES </span><span class="s1">&quot;</span><span class="s2">c_std_90;c_function_prototypes</span><span class="s1">&quot;)</span>
+set<span class="s1">(</span><span class="s2">CMAKE_C99_COMPILE_FEATURES </span><span class="s1">&quot;</span><span class="s2">c_std_99;c_restrict;c_variadic_macros</span><span class="s1">&quot;)</span>
+set<span class="s1">(</span><span class="s2">CMAKE_C11_COMPILE_FEATURES </span><span class="s1">&quot;</span><span class="s2">c_std_11;c_static_assert</span><span class="s1">&quot;)</span>
+
+set<span class="s1">(</span><span class="s2">CMAKE_C_PLATFORM_ID </span><span class="s1">&quot;</span><span class="s2">Darwin</span><span class="s1">&quot;)</span>
+set<span class="s1">(</span><span class="s2">CMAKE_C_SIMULATE_ID </span><span class="s1">&quot;&quot;)</span>
+set<span class="s1">(</span><span class="s2">CMAKE_C_COMPILER_FRONTEND_VARIANT </span><span class="s1">&quot;&quot;)</span>
+set<span class="s1">(</span><span class="s2">CMAKE_C_SIMULATE_VERSION </span><span class="s1">&quot;&quot;)</span>
+
+
+
+set<span class="s1">(</span><span class="s2">CMAKE_AR </span><span class="s1">&quot;</span><span class="s2">/Library/Developer/CommandLineTools/usr/bin/ar</span><span class="s1">&quot;)</span>
+set<span class="s1">(</span><span class="s2">CMAKE_C_COMPILER_AR </span><span class="s1">&quot;&quot;)</span>
+set<span class="s1">(</span><span class="s2">CMAKE_RANLIB </span><span class="s1">&quot;</span><span class="s2">/Library/Developer/CommandLineTools/usr/bin/ranlib</span><span class="s1">&quot;)</span>
+set<span class="s1">(</span><span class="s2">CMAKE_C_COMPILER_RANLIB </span><span class="s1">&quot;&quot;)</span>
+set<span class="s1">(</span><span class="s2">CMAKE_LINKER </span><span class="s1">&quot;</span><span class="s2">/Library/Developer/CommandLineTools/usr/bin/ld</span><span class="s1">&quot;)</span>
+set<span class="s1">(</span><span class="s2">CMAKE_MT </span><span class="s1">&quot;&quot;)</span>
+set<span class="s1">(</span><span class="s2">CMAKE_COMPILER_IS_GNUCC </span><span class="s1">)</span>
+set<span class="s1">(</span><span class="s2">CMAKE_C_COMPILER_LOADED 1</span><span class="s1">)</span>
+set<span class="s1">(</span><span class="s2">CMAKE_C_COMPILER_WORKS TRUE</span><span class="s1">)</span>
+set<span class="s1">(</span><span class="s2">CMAKE_C_ABI_COMPILED TRUE</span><span class="s1">)</span>
+set<span class="s1">(</span><span class="s2">CMAKE_COMPILER_IS_MINGW </span><span class="s1">)</span>
+set<span class="s1">(</span><span class="s2">CMAKE_COMPILER_IS_CYGWIN </span><span class="s1">)</span>
+<span class="s3">if</span><span class="s1">(</span><span class="s2">CMAKE_COMPILER_IS_CYGWIN</span><span class="s1">)</span>
+  set<span class="s1">(</span><span class="s2">CYGWIN 1</span><span class="s1">)</span>
+  set<span class="s1">(</span><span class="s2">UNIX 1</span><span class="s1">)</span>
+<span class="s3">endif</span><span class="s1">()</span>
+
+set<span class="s1">(</span><span class="s2">CMAKE_C_COMPILER_ENV_VAR </span><span class="s1">&quot;</span><span class="s2">CC</span><span class="s1">&quot;)</span>
+
+<span class="s3">if</span><span class="s1">(</span><span class="s2">CMAKE_COMPILER_IS_MINGW</span><span class="s1">)</span>
+  set<span class="s1">(</span><span class="s2">MINGW 1</span><span class="s1">)</span>
+<span class="s3">endif</span><span class="s1">()</span>
+set<span class="s1">(</span><span class="s2">CMAKE_C_COMPILER_ID_RUN 1</span><span class="s1">)</span>
+set<span class="s1">(</span><span class="s2">CMAKE_C_SOURCE_FILE_EXTENSIONS c</span><span class="s1">;</span><span class="s2">m</span><span class="s1">)</span>
+set<span class="s1">(</span><span class="s2">CMAKE_C_IGNORE_EXTENSIONS h</span><span class="s1">;</span><span class="s2">H</span><span class="s1">;</span><span class="s2">o</span><span class="s1">;</span><span class="s2">O</span><span class="s1">;</span><span class="s2">obj</span><span class="s1">;</span><span class="s2">OBJ</span><span class="s1">;</span><span class="s2">def</span><span class="s1">;</span><span class="s2">DEF</span><span class="s1">;</span><span class="s2">rc</span><span class="s1">;</span><span class="s2">RC</span><span class="s1">)</span>
+set<span class="s1">(</span><span class="s2">CMAKE_C_LINKER_PREFERENCE 10</span><span class="s1">)</span>
+
+<span class="s4"># Save compiler ABI information.</span>
+set<span class="s1">(</span><span class="s2">CMAKE_C_SIZEOF_DATA_PTR </span><span class="s1">&quot;</span><span class="s2">8</span><span class="s1">&quot;)</span>
+set<span class="s1">(</span><span class="s2">CMAKE_C_COMPILER_ABI </span><span class="s1">&quot;&quot;)</span>
+set<span class="s1">(</span><span class="s2">CMAKE_C_LIBRARY_ARCHITECTURE </span><span class="s1">&quot;&quot;)</span>
+
+<span class="s3">if</span><span class="s1">(</span><span class="s2">CMAKE_C_SIZEOF_DATA_PTR</span><span class="s1">)</span>
+  set<span class="s1">(</span><span class="s2">CMAKE_SIZEOF_VOID_P </span><span class="s1">&quot;</span><span class="s5">${</span><span class="s2">CMAKE_C_SIZEOF_DATA_PTR</span><span class="s5">}</span><span class="s1">&quot;)</span>
+<span class="s3">endif</span><span class="s1">()</span>
+
+<span class="s3">if</span><span class="s1">(</span><span class="s2">CMAKE_C_COMPILER_ABI</span><span class="s1">)</span>
+  set<span class="s1">(</span><span class="s2">CMAKE_INTERNAL_PLATFORM_ABI </span><span class="s1">&quot;</span><span class="s5">${</span><span class="s2">CMAKE_C_COMPILER_ABI</span><span class="s5">}</span><span class="s1">&quot;)</span>
+<span class="s3">endif</span><span class="s1">()</span>
+
+<span class="s3">if</span><span class="s1">(</span><span class="s2">CMAKE_C_LIBRARY_ARCHITECTURE</span><span class="s1">)</span>
+  set<span class="s1">(</span><span class="s2">CMAKE_LIBRARY_ARCHITECTURE </span><span class="s1">&quot;&quot;)</span>
+<span class="s3">endif</span><span class="s1">()</span>
+
+set<span class="s1">(</span><span class="s2">CMAKE_C_CL_SHOWINCLUDES_PREFIX </span><span class="s1">&quot;&quot;)</span>
+<span class="s3">if</span><span class="s1">(</span><span class="s2">CMAKE_C_CL_SHOWINCLUDES_PREFIX</span><span class="s1">)</span>
+  set<span class="s1">(</span><span class="s2">CMAKE_CL_SHOWINCLUDES_PREFIX </span><span class="s1">&quot;</span><span class="s5">${</span><span class="s2">CMAKE_C_CL_SHOWINCLUDES_PREFIX</span><span class="s5">}</span><span class="s1">&quot;)</span>
+<span class="s3">endif</span><span class="s1">()</span>
+
+
+
+
+
+set<span class="s1">(</span><span class="s2">CMAKE_C_IMPLICIT_INCLUDE_DIRECTORIES </span><span class="s1">&quot;</span><span class="s2">/Library/Developer/CommandLineTools/usr/lib/clang/11.0.3/include;/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include;/Library/Developer/CommandLineTools/usr/include</span><span class="s1">&quot;)</span>
+set<span class="s1">(</span><span class="s2">CMAKE_C_IMPLICIT_LINK_LIBRARIES </span><span class="s1">&quot;&quot;)</span>
+set<span class="s1">(</span><span class="s2">CMAKE_C_IMPLICIT_LINK_DIRECTORIES </span><span class="s1">&quot;</span><span class="s2">/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/lib</span><span class="s1">&quot;)</span>
+set<span class="s1">(</span><span class="s2">CMAKE_C_IMPLICIT_LINK_FRAMEWORK_DIRECTORIES </span><span class="s1">&quot;</span><span class="s2">/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/System/Library/Frameworks</span><span class="s1">&quot;)</span>
+</pre>
+</body>
+</html>

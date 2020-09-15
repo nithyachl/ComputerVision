@@ -1,0 +1,33 @@
+<html>
+<head>
+<title>cmake_clean.cmake</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #000000;}
+.s1 { color: #080808;}
+.s2 { color: #067d17;}
+.s3 { color: #8c8c8c; font-style: italic;}
+.s4 { color: #0033b3;}
+.s5 { color: #0037a6;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+cmake_clean.cmake</font>
+</center></td></tr></table>
+<pre>file<span class="s1">(</span><span class="s2">REMOVE_RECURSE</span>
+  <span class="s1">&quot;</span><span class="s2">CMakeFiles/ComputerVision.dir/l01.cpp.o</span><span class="s1">&quot;</span>
+  <span class="s1">&quot;</span><span class="s2">CMakeFiles/ComputerVision.dir/main.cpp.o</span><span class="s1">&quot;</span>
+  <span class="s1">&quot;</span><span class="s2">ComputerVision</span><span class="s1">&quot;</span>
+  <span class="s1">&quot;</span><span class="s2">ComputerVision.pdb</span><span class="s1">&quot;</span>
+<span class="s1">)</span>
+
+<span class="s3"># Per-language clean rules from dependency scanning.</span>
+<span class="s4">foreach</span><span class="s1">(</span><span class="s2">lang CXX</span><span class="s1">)</span>
+  include<span class="s1">(</span><span class="s2">CMakeFiles/ComputerVision.dir/cmake_clean_</span><span class="s5">${</span><span class="s2">lang</span><span class="s5">}</span><span class="s2">.cmake OPTIONAL</span><span class="s1">)</span>
+<span class="s4">endforeach</span><span class="s1">()</span>
+</pre>
+</body>
+</html>

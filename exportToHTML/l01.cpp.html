@@ -1,0 +1,45 @@
+<html>
+<head>
+<title>l01.cpp</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #8c8c8c; font-style: italic;}
+.s1 { color: #080808;}
+.s2 { color: #9e880d;}
+.s3 { color: #067d17;}
+.s4 { color: #0033b3;}
+.s5 { color: #1750eb;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+l01.cpp</font>
+</center></td></tr></table>
+<pre><span class="s0">//</span>
+<span class="s0">// Created by Nithya Chintalapati on 9/9/20.</span>
+<span class="s0">//</span>
+
+<span class="s2">#include </span><span class="s3">&lt;fstream&gt;</span>
+<span class="s2">#include </span><span class="s3">&lt;cstdio&gt;</span>
+
+<span class="s4">int </span><span class="s1">main() {</span>
+
+    <span class="s4">constexpr auto </span><span class="s1">dimx = </span><span class="s5">800u</span><span class="s1">, dimy = </span><span class="s5">800u</span><span class="s1">;</span>
+
+    <span class="s4">using namespace </span><span class="s1">std;</span>
+    <span class="s1">ofstream ofs(</span><span class="s3">&quot;first.ppm&quot;</span><span class="s1">, ios_base::out | ios_base::binary);</span>
+    <span class="s1">ofs &lt;&lt; </span><span class="s3">&quot;P3&quot; </span><span class="s1">&lt;&lt; endl &lt;&lt; dimx &lt;&lt; </span><span class="s3">' ' </span><span class="s1">&lt;&lt; dimy &lt;&lt; endl &lt;&lt; </span><span class="s3">&quot;256&quot; </span><span class="s1">&lt;&lt; endl;</span>
+
+    <span class="s4">for </span><span class="s1">(</span><span class="s4">auto </span><span class="s1">j = </span><span class="s5">0u</span><span class="s1">; j &lt; dimy; ++j)</span>
+        <span class="s4">for </span><span class="s1">(</span><span class="s4">auto </span><span class="s1">i = </span><span class="s5">0u</span><span class="s1">; i &lt; dimx; ++i)</span>
+            <span class="s1">ofs &lt;&lt; (</span><span class="s4">char</span><span class="s1">) (i % </span><span class="s5">256</span><span class="s1">) &lt;&lt; (</span><span class="s4">char</span><span class="s1">) (j % </span><span class="s5">256</span><span class="s1">) &lt;&lt; (</span><span class="s4">char</span><span class="s1">) ((i * j) % </span><span class="s5">256</span><span class="s1">);       </span><span class="s0">// red, green, blue</span>
+
+    <span class="s1">ofs.close();</span>
+
+    <span class="s4">return </span><span class="s1">EXIT_SUCCESS;</span>
+<span class="s1">}</span>
+</pre>
+</body>
+</html>
