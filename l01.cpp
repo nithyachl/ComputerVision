@@ -8,8 +8,6 @@
 using namespace std;
 
 
-
-
 int main() {
 
     constexpr auto dimx = 800u, dimy = 800u;
@@ -17,11 +15,11 @@ int main() {
     using namespace std;
     ofstream ofs("other.ppm" );
     ofs << "P6" << endl << dimx << ' ' << dimy << endl << "255" << endl;
-    auto x1 = 40;
-    auto y1 = 0;
+    auto x1 = 240u;
+    auto y1 = 200u;
 
-    auto x2 = 800;
-    auto y2 = 800;
+    auto x2 = 660u;
+    auto y2 = 660u;
 
     auto dx = x2-x1;
     auto dy = y2-y1;
@@ -35,8 +33,8 @@ int main() {
             matrix[n][m] = 255;
         }
     }
-
-    for(int z = x1; z< x2;z++)
+    //matrix[y1][x1] = matrix[y2][x2] = 1;
+    for(int z = x1; z<= x2 -1;z++)
     {
         matrix[j][z] = 1; // switch these to matrix[z][j]?
         if(e >= 0)
@@ -65,7 +63,6 @@ int main() {
     ofs.close();
 
     return EXIT_SUCCESS;
-
 
 
 }
