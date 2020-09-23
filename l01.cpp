@@ -4,77 +4,72 @@
 
 # include <iostream>
 # include <fstream>
+#include <cmath>
 
 using namespace std;
 
 int matrix[800][800 * 3];
 
-void bresenham(int x1, int y1, int x2, int y2)
+void bresenham(int x0, int y0, int x1, int y1)//int x1, int y1, int x2, int y2)
 {
 
-    int dy = 2 * (y2 - y1);
-    int e = dy - (x2 - x1);
-    for (int x = x1, y = y1; x <= x2; x++)
+    int dx, dy, p, x, y;
+
+    dx=x1-x0;
+    dy=y1-y0;
+
+    x=x0;
+    y=y0;
+
+    p=2*dy-dx;
+    cout << p;
+    while(x<x1)
     {
-        //cout << "(" << x << "," << y << ")\n";
-        matrix[y][x] = 0;
-        // Add slope to increment angle formed
-        e += dy;
-
-        // Slope error reached limit, time to
-        // increment y and update slope error.
-        if (e >= 0)
+        if(p>=0)
         {
-            y++;
-            e  -= 2 * (x2 - x1);
+            matrix[y][x] = 0;
+            y=y+1;
+            p=p+2*dy-2*dx;
         }
+        else
+        {
+            matrix[y][x] = 0;
+            p=p+2*dy;
+        }
+        x=x+1;
     }
-    /**
-       int dx = x2-x1;
-       int dy = y2-y1;
 
-       int j = y1;
-       int e = dy-dx;
+}
 
-       matrix[y1][x1] = matrix[y2][x2] = 0;
-       for(int z = x1; z<= x2 -1;z++)
-       {
-           matrix[j][z] = 0; // switch these to matrix[z][j]?
-           if(e >= 0)
-           {
-               j += 1;
-               e -= dx;
-           }
-           e +=dy;
-           z +=1;
-       }
+double distance(double x, double y, double a, double b)
+{
+    return sqrt(pow(x - a, 2) + pow(y - b, 2));
+}
 
-       int dx, dy, p, x, y;
 
-       dx=x1-x0;
-       dy=y1-y0;
+double * findcircumcenter(){
+ /**double arr[2];
+        // Line PQ is represented as ax + by = c
+        double a, b, c;
+lineFromPoints(P, Q, a, b, c);
 
-       x=x0;
-       y=y0;
+// Line QR is represented as ex + fy = g
+double e, f, g;
+lineFromPoints(Q, R, e, f, g);
 
-       p=2*dy-dx;
+// Converting lines PQ and QR to perpendicular
+// vbisectors. After this, L = ax + by = c
+// M = ex + fy = g
+perpendicularBisectorFromLine(P, Q, a, b, c);
+perpendicularBisectorFromLine(Q, R, e, f, g);
 
-       while(x<x1)
-       {
-           if(p>=0)
-           {
-               matrix[y][x] = 0;
-               y=y+1;
-               p=p+2*dy-2*dx;
-           }
-           else
-           {
-               matrix[y][x] = 0;
-               p=p+2*dy;
-           }
-           x=x+1;
-       }
-         **/
+// The point of intersection of L and M gives
+// the circumcenter
+pdd circumcenter =
+        lineLineIntersection(a, b, c, e, f, g);
+return arr;
+  **/
+
 }
 
 int main() {
@@ -159,45 +154,21 @@ int main() {
     bresenham(x1, y1, x2, y2);
     bresenham(x2, y2, x3, y3);
     bresenham(x1, y1, x3, y3);
-/**
-    int dx = x2-x1;
-    int dy = y2-y1;
 
-    int j = y1;
-    int e = dy-dx;
+    double a = distance(x1, y1, x2, y2);
+    double b = distance(x2, y2, x3, y3);
+    double c = distance(x1, y1, x3, y3);
+  int s =  0.5 * (a+b+c);
 
-    matrix[y1][x1] = matrix[y2][x2] = 0;
-    for(int z = x1; z<= x2 -1;z++)
-    {
-        matrix[j][z] = 0; // switch these to matrix[z][j]?
-        if(e >= 0)
-        {
-            j += 1;
-            e -= dx;
-        }
-        e +=dy;
-        z +=1;
-    }
+  double rincircle = sqrt(((s-a)*(s-b)*(s-c))/s);
+  double rcircumcircle = (a*b*c)/(4*rincircle *s);
 
-    int dx2 = x3-x2;
-    int dy2 = y3-y2;
+   /**
 
-    int j2 = y2;
-    int e2 = dy2-dx2;
+ To calulate the coordinates of the circumcenter, find the intersection of the
+perpendicular bisectors of any two of the triangle’s sides. **/
 
-    //matrix[y1][x1] = matrix[y2][x2] = 0;
-    for(int n = x2; n<= x3 ;n++)
-    {
-        matrix[j2][n] = 0; // switch these to matrix[z][j]?
-        if(e2 >= 0)
-        {
-            j2 += 1;
-            e2 -= dx2;
-        }
-        e2 +=dy2;
-        n +=1;
-    }
-**/
+
     for (int n = 0; n < dimy; n++) {
         for (int m = 0; m < dimx*3; m++) {
 
