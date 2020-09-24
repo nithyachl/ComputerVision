@@ -8,25 +8,35 @@
 
 using namespace std;
 
-int matrix[800][800 * 3];
+int matrix[800*3][800*3];
+int center [2];
 
 double *lineLineIntersection(double slopeperpbi12, double d, double d1, double slopeperpbi13, double d2, double d3);
 
+double getMidpoint(int mathx1, int mathx2);
+
+double getSlope(int b1, int b2, int b3, int b4);
+
+void drawcricle(double rcircumcircle, double xcenter, double ycenter);
+
+void drawCircle(int i, int i1, int x, int y);
+
 void bresenham(int x1, int y1, int x2, int y2)//int x0, int y0, int x1, int y1)
 {
-    int w = x2 - x1 ;
-    int h = y2 - y1 ;
+
+    int h = x2 - x1 ;
+    int w = y2 - y1 ;
     int dx1 = 0, dy1 = 0, dx2 = 0, dy2 = 0 ;
-    if (w<0) dx1 = -1 ; else if (w>0) dx1 = 1 ;
-    if (h<0) dy1 = -1 ; else if (h>0) dy1 = 1 ;
-    if (w<0) dx2 = -1 ; else if (w>0) dx2 = 1 ;
+    if (w<0) dy1 = -1 ; else if (w>0) dy1 = 1 ;
+    if (h<0) dx1 = -1 ; else if (h>0) dx1 = 1 ;
+    if (w<0) dy2 = -1 ; else if (w>0) dy2 = 1 ;
     int longest = abs(w) ;
     int shortest = abs(h) ;
     if (!(longest>shortest)) {
         longest = abs(h) ;
         shortest = abs(w) ;
-        if (h<0) dy2 = -1 ; else if (h>0) dy2 = 1 ;
-        dx2 = 0 ;
+        if (h<0) dx2 = -1 ; else if (h>0) dx2 = 1 ;
+        dy2 = 0 ;
     }
     int numerator = longest >> 1 ;
     for (int i=0;i<=longest;i++) {
@@ -42,37 +52,6 @@ void bresenham(int x1, int y1, int x2, int y2)//int x0, int y0, int x1, int y1)
         }
     }
 
-/**
-    int dx, dy, p, x, y;
-
-    dx=x1-x0;
-    dy=y1-y0;
-
-    x=x0;
-    y=y0;
-
-    p=2*dy-dx;
-    //cout << p;
-
-
-    while(x<x1)
-    {
-        if(p>=0)
-        {
-            matrix[y][x] = 0;
-            y=y+1;
-            p=p+2*dy-2*dx;
-        }
-        else
-        {
-            matrix[y][x] = 0;
-            p=p+2*dy;
-        }
-        x=x+1;
-    }
-
-    **/
-
 }
 
 double distance(double x, double y, double a, double b)
@@ -81,65 +60,82 @@ double distance(double x, double y, double a, double b)
 }
 
 
-double * findcircumcenter(int x1, int x2, int x3,int y1, int y2, int y3 ){
-
-    double* center;
-
-    int mathy1 = 1;//799-x1;
-    int mathy2 = -2;//799-x2;
-    int mathy3 = -4;//799-x3;
-    int mathx1 = 0;//y1;
-    int mathx2 = 4;//y2;
-    int mathx3 = 3;//y3;
-
-//    cout << "mathx1: " << mathx1 << " mathy1: " << mathy1 << "\n";
-//    cout << "mathx2: " << mathx2 << " mathy2: " << mathy2 << "\n";
-//    cout << "mathx3: " << mathx3 << " mathy3: " << mathy3 << "\n";
-
-    double slope12 = double(mathy2-mathy1)/double(mathx2-mathx1);
-    //cout <<"slope: " <<slope12 << "\n";
-
-    double slopeperpbi12 = -1/slope12;
-
-    double midpointx = (mathx1 + mathx2)/2;
-    double midpointy = (mathy1 + mathy2)/2;
+void findcircumcenter(int x1, int x2, int x3,int y1, int y2, int y3 ){
 
 
 
-    //cout << "midpointx: " << midpointx;
-   //cout << "midpointy: " << midpointy;
-    double slope13 = double(mathy3-mathy1)/double(mathx3-mathx1);
-    double slopeperpbi13 = -1/slope13;
-    double midpointx2 = (mathx1 + mathx3)/2;
-    double midpointy2 = (mathy1 + mathy3)/2;
-    //cout <<"slope: " <<slope13 << "\n";
+    int mathy1 = 799-x1;
+    int mathy2 = 799-x2;
+    int mathy3 = 799-x3;
+    int mathx1 = y1;
+    int mathx2 = y2;
+    int mathx3 = y3;
 
-    center = lineLineIntersection(slopeperpbi12, (double)-1, -(midpointy- (midpointx*slopeperpbi12)),slopeperpbi13, (double)-1, -(midpointy2- (midpointx2*slopeperpbi13)));
-    cout << "circumcenterxval: " << center[0] << "\n";
-    cout << "circumcenteryval: " << center[1];
-    return center;
+    cout << "mathx1: " << mathx1 << " mathy1: " << mathy1 << "\n";
+    cout << "mathx2: " << mathx2 << " mathy2: " << mathy2 << "\n";
+    cout << "mathx3: " << mathx3 << " mathy3: " << mathy3 << "\n";
+
+    double midpoint12x = (double)getMidpoint(mathx1,mathx2);
+    double midpoint12y = (double)getMidpoint(mathy1,mathy2);
+    double midpoint13x = (double)getMidpoint(mathx1,mathx3);
+    double midpoint13y = (double)getMidpoint(mathy1,mathy3);
+
+    cout << "m13x: "<< midpoint13x << "\n";
+    cout << "m13y: "<< midpoint13y << "\n";
+
+    double slope12 = (double)-1 / (double)getSlope(mathy2, mathy1, mathx2, mathx1);
+    double slope13 = (double)-1 / (double)getSlope(mathy3, mathy1, mathx3, mathx1);
+
+    cout << "s12: "<< slope12 << "\n";
+    cout << "s13: "<< slope13 << "\n";
+
+    double b12 = (double)midpoint12y - (double)slope12 * (double)midpoint12x;
+
+    double b13 = (double)midpoint13y - (double)slope13 * (double)midpoint13x;
+
+    cout << "b12: "<< b12 << "\n";
+    cout << "b13: "<<b13 << "\n";
+
+    double xfinal =  (b12 - b13) / (slope13 - slope12);
+    double yfinal =  slope12 * xfinal + b12;
+
+
+    int markcenterx = (int)(799-yfinal);
+    int markcentery = (int)(xfinal);
+
+    center[0] = markcenterx;
+    center[1] = markcentery;
+
+    matrix[markcentery][markcenterx] = 0;
+
+
+    cout << "circumcenterxval: " << markcenterx << "\n";
+    cout << "circumcenteryval: " << markcentery;
+
+
 }
 
-double *lineLineIntersection(double a1, double b1, double c1, double a2, double b2, double c2) {
-    double *center;
-        cout << "a1: " << a1 << " b1: " << b1 << " c1: " << c1 <<"\n";
-    cout << "a2: " << a2 << " b2: " << b2 << " c2: " << c2 <<"\n";
-    double determinant = a1*b2 - a2*b1;
-    if (determinant == 0)
-    {
-
-        cout << "lines are parrallel";
-    }
-
-    else
-    {
-        double x = (b2*c1 - b1*c2)/determinant;
-        double y = (a1*c2 - a2*c1)/determinant;
-        center[0] = x;
-        center[1]= y;
-        return center;
-    }
+double getSlope(int b1, int b2, int b3, int b4) {
+    return (double)((double)(b1-b2)/(double)(b3-b4));
 }
+
+double getMidpoint(int a1, int a2) {
+    return (double)((a1+a2)/((double)2));
+}
+
+void circle(double r, double xcenter, double ycenter) {
+
+    int x, y, r2;
+
+    r2 = (int)r * (int)r;
+    for (x = -r; x <= r; x++) {
+
+             y = (int) (sqrt(r2 - x*x) +0.5 );
+                matrix[(int) (ycenter + y)][ (int)(xcenter + x)] = 0;
+                matrix[(int) (ycenter - y)][ (int)(xcenter + x)] = 0;
+            }
+}
+
 
 
 
@@ -153,14 +149,14 @@ int main() {
 
     srand( time(NULL) );
 
-    int x1 = (int)(rand()%800);
-    int y1 = (int)(rand()%800);
+    int x1 = 353;//(int)(rand()%800);
+    int y1 = 178;//(int)(rand()%800);
 
-    int x2 = (int)(rand()%800);
-    int y2 = (int)(rand()%800);
+    int x2 = 707;//(int)(rand()%800);
+    int y2 = 178;//(int)(rand()%800);
 
-    int x3 = (int)(rand()% 800);
-    int y3 = (int)(rand()% 800);
+    int x3 = 768;//(int)(rand()% 800);
+    int y3 = 458;//(int)(rand()% 800);
 
 
     if (x2> x3)
@@ -234,8 +230,10 @@ int main() {
   double rincircle = sqrt(((s-a)*(s-b)*(s-c))/s);
   double rcircumcircle = (a*b*c)/(4*rincircle *s);
 
-  double *circumcenter = findcircumcenter(2, -2, 1, 1, 3, -2);// x1,  x2,  x3, y1,  y2, y3 );
- // cout << "circumcenterxval: " << circumcenter[0];
+ findcircumcenter( x1,  x2,  x3, y1,  y2, y3 );
+ circle(rcircumcircle, center[0], center[1]);
+
+  // cout << "circumcenterxval: " << circumcenter[0];
  // cout << "circumcenterxval: " << circumcenter[1];
    /**
 
@@ -243,10 +241,10 @@ int main() {
 perpendicular bisectors of any two of the triangle’s sides. **/
 
 
-    for (int n = 0; n < dimy; n++) {
-        for (int m = 0; m < dimx*3; m++) {
+    for (int n = 0; n < dimy*3; ++n) {
+        for (int m = 0; m < dimx*3; ++m) {
 
-                myfile<< std::to_string(matrix[n][m])<< " ";
+                myfile<< matrix[n][m]<< "" << matrix[n][m]<< "" <<matrix[n][m] << " ";//std::to_string(matrix[n][m])<< " ";
 
         }
         myfile << endl;
@@ -258,6 +256,8 @@ myfile.close();
 
     return 0;
 }
+
+
 
 
 
