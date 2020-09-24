@@ -10,9 +10,39 @@ using namespace std;
 
 int matrix[800][800 * 3];
 
-void bresenham(int x0, int y0, int x1, int y1)//int x1, int y1, int x2, int y2)
-{
+double *lineLineIntersection(double slopeperpbi12, double d, double d1, double slopeperpbi13, double d2, double d3);
 
+void bresenham(int x1, int y1, int x2, int y2)//int x0, int y0, int x1, int y1)
+{
+    int w = x2 - x1 ;
+    int h = y2 - y1 ;
+    int dx1 = 0, dy1 = 0, dx2 = 0, dy2 = 0 ;
+    if (w<0) dx1 = -1 ; else if (w>0) dx1 = 1 ;
+    if (h<0) dy1 = -1 ; else if (h>0) dy1 = 1 ;
+    if (w<0) dx2 = -1 ; else if (w>0) dx2 = 1 ;
+    int longest = abs(w) ;
+    int shortest = abs(h) ;
+    if (!(longest>shortest)) {
+        longest = abs(h) ;
+        shortest = abs(w) ;
+        if (h<0) dy2 = -1 ; else if (h>0) dy2 = 1 ;
+        dx2 = 0 ;
+    }
+    int numerator = longest >> 1 ;
+    for (int i=0;i<=longest;i++) {
+        matrix[y1][x1] = 0;
+        numerator += shortest ;
+        if (!(numerator<longest)) {
+            numerator -= longest ;
+            x1 += dx1 ;
+            y1 += dy1 ;
+        } else {
+            x1 += dx2 ;
+            y1 += dy2 ;
+        }
+    }
+
+/**
     int dx, dy, p, x, y;
 
     dx=x1-x0;
@@ -22,7 +52,9 @@ void bresenham(int x0, int y0, int x1, int y1)//int x1, int y1, int x2, int y2)
     y=y0;
 
     p=2*dy-dx;
-    cout << p;
+    //cout << p;
+
+
     while(x<x1)
     {
         if(p>=0)
@@ -39,6 +71,8 @@ void bresenham(int x0, int y0, int x1, int y1)//int x1, int y1, int x2, int y2)
         x=x+1;
     }
 
+    **/
+
 }
 
 double distance(double x, double y, double a, double b)
@@ -47,30 +81,67 @@ double distance(double x, double y, double a, double b)
 }
 
 
-double * findcircumcenter(){
- /**double arr[2];
-        // Line PQ is represented as ax + by = c
-        double a, b, c;
-lineFromPoints(P, Q, a, b, c);
+double * findcircumcenter(int x1, int x2, int x3,int y1, int y2, int y3 ){
 
-// Line QR is represented as ex + fy = g
-double e, f, g;
-lineFromPoints(Q, R, e, f, g);
+    double* center;
 
-// Converting lines PQ and QR to perpendicular
-// vbisectors. After this, L = ax + by = c
-// M = ex + fy = g
-perpendicularBisectorFromLine(P, Q, a, b, c);
-perpendicularBisectorFromLine(Q, R, e, f, g);
+    int mathy1 = 1;//799-x1;
+    int mathy2 = -2;//799-x2;
+    int mathy3 = -4;//799-x3;
+    int mathx1 = 0;//y1;
+    int mathx2 = 4;//y2;
+    int mathx3 = 3;//y3;
 
-// The point of intersection of L and M gives
-// the circumcenter
-pdd circumcenter =
-        lineLineIntersection(a, b, c, e, f, g);
-return arr;
-  **/
+//    cout << "mathx1: " << mathx1 << " mathy1: " << mathy1 << "\n";
+//    cout << "mathx2: " << mathx2 << " mathy2: " << mathy2 << "\n";
+//    cout << "mathx3: " << mathx3 << " mathy3: " << mathy3 << "\n";
 
+    double slope12 = double(mathy2-mathy1)/double(mathx2-mathx1);
+    //cout <<"slope: " <<slope12 << "\n";
+
+    double slopeperpbi12 = -1/slope12;
+
+    double midpointx = (mathx1 + mathx2)/2;
+    double midpointy = (mathy1 + mathy2)/2;
+
+
+
+    //cout << "midpointx: " << midpointx;
+   //cout << "midpointy: " << midpointy;
+    double slope13 = double(mathy3-mathy1)/double(mathx3-mathx1);
+    double slopeperpbi13 = -1/slope13;
+    double midpointx2 = (mathx1 + mathx3)/2;
+    double midpointy2 = (mathy1 + mathy3)/2;
+    //cout <<"slope: " <<slope13 << "\n";
+
+    center = lineLineIntersection(slopeperpbi12, (double)-1, -(midpointy- (midpointx*slopeperpbi12)),slopeperpbi13, (double)-1, -(midpointy2- (midpointx2*slopeperpbi13)));
+    cout << "circumcenterxval: " << center[0] << "\n";
+    cout << "circumcenteryval: " << center[1];
+    return center;
 }
+
+double *lineLineIntersection(double a1, double b1, double c1, double a2, double b2, double c2) {
+    double *center;
+        cout << "a1: " << a1 << " b1: " << b1 << " c1: " << c1 <<"\n";
+    cout << "a2: " << a2 << " b2: " << b2 << " c2: " << c2 <<"\n";
+    double determinant = a1*b2 - a2*b1;
+    if (determinant == 0)
+    {
+
+        cout << "lines are parrallel";
+    }
+
+    else
+    {
+        double x = (b2*c1 - b1*c2)/determinant;
+        double y = (a1*c2 - a2*c1)/determinant;
+        center[0] = x;
+        center[1]= y;
+        return center;
+    }
+}
+
+
 
 int main() {
     int dimx = 800;
@@ -163,6 +234,9 @@ int main() {
   double rincircle = sqrt(((s-a)*(s-b)*(s-c))/s);
   double rcircumcircle = (a*b*c)/(4*rincircle *s);
 
+  double *circumcenter = findcircumcenter(2, -2, 1, 1, 3, -2);// x1,  x2,  x3, y1,  y2, y3 );
+ // cout << "circumcenterxval: " << circumcenter[0];
+ // cout << "circumcenterxval: " << circumcenter[1];
    /**
 
  To calulate the coordinates of the circumcenter, find the intersection of the
